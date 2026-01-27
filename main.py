@@ -100,3 +100,18 @@ fig_trend = px.line(
 )
 
 st.plotly_chart(fig_trend, use_container_width=True)
+
+
+
+import re
+
+def normalize_round(x):
+    """
+    어떤 형태든 → 'N회'로 통일
+    예: 1, 1.0, '01', '1회', '제1회' → '1회'
+    """
+    nums = re.findall(r"\d+", str(x))
+    return f"{int(nums[0])}회" if nums else "0회"
+
+df[round_col] = df[round_col].apply(normalize_round)
+
