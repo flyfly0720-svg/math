@@ -27,6 +27,14 @@ if uploaded_file:
 else:
     df = base_df.copy()
 
+fig_dist.add_hline(
+    y=top_30_score,
+    line_dash="dot",
+    annotation_text="상위 30% 기준",
+    annotation_position="top left"
+)
+
+
 # ======================
 # 2. 컬럼 자동 판별 (🔥 핵심)
 # ======================
