@@ -114,3 +114,31 @@ def normalize_round(x):
 
 df[round_col] = df[round_col].apply(normalize_round)
 
+# ======================
+# 점수 분포 그래프
+# ======================
+fig_dist = px.histogram(
+    round_df,
+    x=score_col,
+    nbins=20,
+    title=f"{selected_round} 회차 점수 분포"
+)
+
+# 내 점수 (세로선)
+fig_dist.add_vline(
+    x=my_score,
+    line_dash="dash",
+    annotation_text="내 점수"
+)
+
+# 상위 30% 기준선 (⚠️ 반드시 fig 생성 이후)
+fig_dist.add_hline(
+    y=top_30_score,
+    line_dash="dot",
+    annotation_text="상위 30% 기준",
+    annotation_position="top left"
+)
+
+st.plotly_chart(fig_dist, use_container_width=True)
+
+
