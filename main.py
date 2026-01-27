@@ -86,13 +86,41 @@ fig_dist = px.histogram(
     title=f"{selected_round} 회차 점수 분포"
 )
 
-fig_dist.add_vline(
-    x=my_score,
-    line_dash="dash",
-    annotation_text="내 점수"
-)
 
-st.plotly_chart(fig_dist, use_container_width=True)
+# ======================
+# 점수 분포 그래프 (NameError 방지 버전)
+# ======================
+fig_dist = None  # 🔒 먼저 정의
+
+if not round_df.empty:
+    fig_dist = px.histogram(
+        round_df,
+        x=score_col,
+        nbins=20,
+        title=f"{selected_round} 회차 점수 분포"
+    )
+
+    fig_dist.add_vline(
+        x=my_score,
+        line_dash="dash",
+        annotation_text="내 점수"
+    )
+
+    fig_dist.add_hline(
+        y=top_30_score,
+        line_dash="dot",
+        annotation_text="상위 30% 기준",
+        annotation_position="top left"
+    )
+
+if fig_dist is not None:
+    st.plotly_chart(fig_dist, use_container_width=True)
+else:
+    st.warning("해당 회차에 표시할 데이터가 없습니다.")
+
+
+
+
 
 # ======================
 # 7. 회차별 평균 추이
