@@ -45,7 +45,9 @@ st.caption(f"✔ 회차 컬럼: **{round_col}**, 점수 컬럼: **{score_col}**"
 # ======================
 # 3. 회차 선택
 # ======================
+df[round_col] = df[round_col].astype(str)
 rounds = sorted(df[round_col].unique())
+
 selected_round = st.selectbox("📌 분석할 회차 선택", rounds)
 
 round_df = df[df[round_col] == selected_round]
