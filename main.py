@@ -99,15 +99,6 @@ st.plotly_chart(fig_dist, use_container_width=True)
 # ======================
 trend_df = df.groupby(round_col)[score_col].mean().reset_index()
 
-fig_trend = px.line(
-    trend_df,
-    x=round_col,
-    y=score_col,
-    markers=True,
-    title="📈 회차별 평균 점수 추이"
-)
-
-st.plotly_chart(fig_trend, use_container_width=True)
 
 
 
