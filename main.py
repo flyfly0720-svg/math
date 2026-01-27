@@ -134,4 +134,19 @@ def normalize_round(x):
 df[round_col] = df[round_col].apply(normalize_round)
 
 
+# ======================
+# 개념별 비교 그래프
+# ======================
+if concept_df.empty:
+    st.warning("개념별 분석에 필요한 데이터가 부족합니다.")
+else:
+    fig_concept = px.bar(
+        concept_df,
+        x="개념",
+        y=["내 점수", "상위 30% 평균"],
+        barmode="group",
+        title="📌 개념별 내 점수 vs 상위 30% 평균 비교"
+    )
+
+    st.plotly_chart(fig_concept, use_container_width=True)
 
