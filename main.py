@@ -82,11 +82,12 @@ fig_dist = px.histogram(
 
 
 # ======================
-# 점수 분포 그래프 (NameError 방지 버전)
+# 점수 분포 그래프 (완전 안전 버전)
 # ======================
-fig_dist = None  # 🔒 먼저 정의
 
-if not round_df.empty:
+if round_df.empty:
+    st.warning("해당 회차에 데이터가 없습니다.")
+else:
     fig_dist = px.histogram(
         round_df,
         x=score_col,
@@ -107,11 +108,7 @@ if not round_df.empty:
         annotation_position="top left"
     )
 
-if fig_dist is not None:
     st.plotly_chart(fig_dist, use_container_width=True)
-else:
-    st.warning("해당 회차에 표시할 데이터가 없습니다.")
-
 
 
 
