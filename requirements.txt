@@ -1,3 +1,2 @@
-streamlit
-pandas
-plotly
+OpenWiki is a CLI that writes and maintains agent documentation for your codebase.
+ TypeScript 9.5k
